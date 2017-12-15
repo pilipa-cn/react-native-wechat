@@ -2,6 +2,8 @@
 
 # React-Native-Wechat
 
+Pilipa Changes: 修复腾讯微信官方iOS SDK并不能返回微信是否安装的Bug, 改用 weixin:// URL检测.
+
 [React Native] bridging library that integrates WeChat SDKs:
 
 - [x] iOS SDK 1.7.2
