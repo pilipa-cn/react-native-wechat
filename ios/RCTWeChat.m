@@ -75,7 +75,15 @@ RCT_EXPORT_METHOD(registerAppWithDescription:(NSString *)appid
 
 RCT_EXPORT_METHOD(isWXAppInstalled:(RCTResponseSenderBlock)callback)
 {
-    callback(@[[NSNull null], @([WXApi isWXAppInstalled])]);
+    BOOL isInstall = false;
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]] ||
+        [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"wechat://"]] ||
+        [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb290293790992170://"]]){
+        isInstall = true;
+    }
+    callback(@[[NSNull null], @(isInstall)]);
+
+//    callback(@[[NSNull null], @([WXApi isWXAppInstalled])]);
 }
 
 RCT_EXPORT_METHOD(isWXAppSupportApi:(RCTResponseSenderBlock)callback)
