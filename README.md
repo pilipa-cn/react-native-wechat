@@ -288,7 +288,14 @@ catch (e) {
 - returns {Object}
 
 Similar to `shareToTimeline` but send message to a friend or chat group.
-
+#### shareAppletsToSession
+- `data` {Object} 分享小程序需要的参数
+ - `webpageUrl` {String} 兼容低版本微信时需要一个网页链接
+ - `userName` {String} 小程序原始ID 可从小程序后台查找
+ - `path` {String} 小程序路径 可从小程序后台查找
+ - `title` {String} 分享的title
+ - `description` {String} 分享的描述
+ - `imageUrl` {String} 分享图片的url 
 #### pay(payload)
 
 - `payload` {Object} the payment data
