@@ -191,6 +191,7 @@ RCT_EXPORT_METHOD(shareAppletsToSession:(NSDictionary *)data
     wxMiniObject.webpageUrl = data[@"webpageUrl"];
     wxMiniObject.userName = data[@"userName"];
     wxMiniObject.path = data[@"path"];
+    wxMiniObject.miniProgramType = [data[@"appType"] integerValue];
     //    wxMiniObject.hdImageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:@"https://assets.pilipa.cn/public/logo/share.png"]];
     WXMediaMessage * message = [WXMediaMessage message];
     message.title = data[@"title"];
