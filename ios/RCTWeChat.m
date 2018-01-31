@@ -196,7 +196,7 @@ RCT_EXPORT_METHOD(shareAppletsToSession:(NSDictionary *)data
     message.title = data[@"title"];
     message.description = data[@"description"];
     message.mediaObject = wxMiniObject;
-    NSURL *imageUrl = [NSURL URLWithString:data[@"imageUrl"]];
+    NSURL *imageUrl = [NSURL URLWithString:data[@"thumbImage"]];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
     [message setThumbImage:image];
     

@@ -2,7 +2,10 @@
 
 # React-Native-Wechat
 
-Pilipa Changes: 修复腾讯微信官方iOS SDK并不能返回微信是否安装的Bug, 改用 weixin:// URL检测.
+Pilipa Changes: 
+
+- 修复腾讯微信官方iOS SDK并不能返回微信是否安装的Bug, 改用 weixin:// URL检测.
+- 增加分享到小程序的功能. 2018-01-29
 
 [React Native] bridging library that integrates WeChat SDKs:
 
@@ -11,8 +14,8 @@ Pilipa Changes: 修复腾讯微信官方iOS SDK并不能返回微信是否安装
 
 And [react-native-wechat] has the following tracking data in open source world:
 
-| NPM | Dependency | Downloads | Build |
-|-----|------------|-----------|-------|
+| NPM                                  | Dependency                               | Downloads                                | Build                                    |
+| ------------------------------------ | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | [![NPM version][npm-image]][npm-url] | [![Dependency Status][david-image]][david-url] | [![Downloads][downloads-image]][downloads-url] | [![Build Status][travis-image]][travis-url] |
 
 ## Table of Contents
@@ -89,7 +92,7 @@ Send authentication request, and it returns an object with the
 following fields:
 
 | field   | type   | description                         |
-|---------|--------|-------------------------------------|
+| ------- | ------ | ----------------------------------- |
 | errCode | Number | Error Code                          |
 | errStr  | String | Error message if any error occurred |
 | openId  | String |                                     |
@@ -100,7 +103,7 @@ following fields:
 
 #### class `ShareMetadata`
 
-- `type` {Number} type of this message. Can be {news|text|imageUrl|imageFile|imageResource|video|audio|file}
+- `type` {Number} type of this message. Can be {news|text|imageUrl|imageFile|imageResource|video|audio|file|miniProgram(小程序)}
 - `thumbImage` {String} Thumb image of the message, which can be a uri or a resource id.
 - `description` {String} The description about the sharing.
 - `webpageUrl` {String} Required if type equals `news`. The webpage link to share.
@@ -118,7 +121,7 @@ following fields:
 Share a `ShareMetadata` message to timeline(朋友圈) and returns:
 
 | name    | type   | description                         |
-|---------|--------|-------------------------------------|
+| ------- | ------ | ----------------------------------- |
 | errCode | Number | 0 if authorization successed        |
 | errStr  | String | Error message if any error occurred |
 
@@ -295,8 +298,23 @@ Similar to `shareToTimeline` but send message to a friend or chat group.
   - `path` {String} 小程序路径 可从小程序后台查找
   - `title` {String} 分享的title
   - `description` {String} 分享的描述
-  - `imageUrl` {String} 分享图片的url
+  - `thumbImage` {String}  消息的缩略图, which can be a uri or a resource id, 小程序最大128KB(131072字节), 400x400尺寸
+  - `type` {Number} 必须填写  消息类型, 小程序必须写为 {miniProgram}
+  - `appType` {Number} 可选  小程序的类型,  {0, 正式; 1, 测试; 2, 预览}
 - returns {Object}
+```javascript
+WeChat.shareAppletsToSession({
+    webpageUrl:'https://www.pilipa.cn/',
+    userName:'gh_你的小程序用户名',
+    path:'pages/index',
+    title:'小程序标题',
+    description:'小程序描述',
+    thumbImage:'https://host/logo.png',
+    type: 'miniProgram',
+  	appType: 0
+})
+```
+
 #### pay(payload)
 
 - `payload` {Object} the payment data
@@ -311,7 +329,7 @@ Similar to `shareToTimeline` but send message to a friend or chat group.
 Sends request for proceeding payment, then returns an object:
 
 | name    | type   | description                         |
-|---------|--------|-------------------------------------|
+| ------- | ------ | ----------------------------------- |
 | errCode | Number | 0 if authorization successed        |
 | errStr  | String | Error message if any error occurred |
 
@@ -340,11 +358,11 @@ $ npm install react-native-wechat --save
 
 ## Authors
 
-| GitHub        | Role       | Email                 |
-|---------------|------------|-----------------------|
-| [@yorkie]     | Author     | yorkiefixer@gmail.com |
-| [@xing-zheng] | Emeriti    |                       |
-| [@tdzl2003]   | Emeriti    | tdzl2003@gmail.com    |
+| GitHub        | Role    | Email                 |
+| ------------- | ------- | --------------------- |
+| [@yorkie]     | Author  | yorkiefixer@gmail.com |
+| [@xing-zheng] | Emeriti |                       |
+| [@tdzl2003]   | Emeriti | tdzl2003@gmail.com    |
 
 [@yorkie]: https://github.com/yorkie
 [@xing-zheng]: https://github.com/xing-zheng
@@ -365,5 +383,5 @@ MIT
 [downloads-url]: https://npmjs.org/package/react-native-wechat
 [React Native]: https://github.com/facebook/react-native
 [react-native-cn]: https://github.com/reactnativecn
-[WeChat SDK]: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=1417674108&token=&lang=zh_CN
+[WeChat SDK]: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;amp;t=resource/res_list&amp;amp;verify=1&amp;amp;id=1417674108&amp;amp;token=&amp;amp;lang=zh_CN
 [Linking Libraries iOS Guidance]: https://developer.apple.com/library/ios/recipes/xcode_help-project_editor/Articles/AddingaLibrarytoaTarget.html
