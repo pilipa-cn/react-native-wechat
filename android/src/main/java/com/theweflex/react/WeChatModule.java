@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * 增加分享到小程序功能, 小程序缩略图分辨率300x300, 最大不超过32K.
+ * 增加分享到小程序功能, 小程序缩略图分辨率400x400, 最大不超过32K.
  * @author beansoft 2018-01-31
  * Created by tdzl2_000 on 2015-10-10.
  */
